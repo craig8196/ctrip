@@ -1,0 +1,4 @@
+[submodule "hitime"]
+	path = hitime
+	url = https://github.com/craig8196/hitime
+	branch = v1.1.1
