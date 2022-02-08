@@ -1,11 +1,13 @@
 
 
 # C-Trip
+
 C implementation of The River Protocol (TRP/TRiP).
 TRiP is a flexible communications protocol.
 
 
 ## WARNINGS
+
 * STILL BEING DESIGNED!
 * The code is experimental and probably has flaws
 * Currently in pre-release and will not follow semantic versioning
@@ -17,6 +19,7 @@ TRiP is a flexible communications protocol.
 
 
 ## Current Goals
+
 * Test-able interface to ensure code quality and quick turn-around.
 * Easily build custom protocols for niche applications.
 * Security by default (user must disable security).
@@ -30,11 +33,13 @@ TRiP is a flexible communications protocol.
 
 
 ## Future Goals
+
 * Serializable connections for long disconnects.
 * IoT capable through minimal client implementations to minimize build size.
 
 
 ## Why use TRiP?
+
 Let's look at some existing communications protocols...
 
 Note that every protocol suffers from packet attacks due to the insecure
@@ -78,10 +83,12 @@ TRiP suffers from:
 
 
 ## Implementation Notes
+
 Outline of basic design and expectations.
 
 
 ### Testable Design
+
 While C is definitely imperative, and calling router_perform may result in
 mutations, the design is to make testing extremely controllable.
 This is done by removing calls for the current time, system calls for a
@@ -92,6 +99,7 @@ is overwritten for the return value.
 
 
 ### Imperative Shells
+
 The design is intended to be functional-esq, even if the router mutates
 you can pretend that every time `router_perform` is called a new router
 and action are returned.
@@ -100,10 +108,12 @@ wrapping functions and objects to create an imperative shell.
 
 
 ### Memory Allocation
+
 Memory interface can be adjusted by overwriting the `libtrp_memory.h` header.
 
 
 ### Interface
+
 The interface must be implemented in a generic way.
 To/from destinations can be specified using UTF8 or binary strings.
 This aids testing and allows the protocol to be used over any packet oriented
@@ -111,6 +121,7 @@ communication method.
 
 
 ### ABI
+
 The compiled shared object should be backward compatible
 taking version and implementation changes into account.
 Struct sizes and details should not be made available to the users;
@@ -121,18 +132,21 @@ makes common structs globally available for handling one connection at a time.
 
 
 ### Dependencies: Library
+
 * libhitime: Timeout management.
 * libc: Standard/common functions.
 * libsodium: For security. Efficient and easy-to-use encryption.
 
 
 ### Dependencies: Examples
+
 * OS provided UDP socket interface.
 * OS provided event watching (epoll for Linux).
 * libcares (in the future): For DNS resolution.
 
 
 ## Build
+
 For those unfamiliar with cmake:
 
         mkdir build && cd build
